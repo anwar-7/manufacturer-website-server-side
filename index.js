@@ -30,6 +30,9 @@ async function run() {
     await client.connect();
     const toolsCollection = client.db('ztools').collection('tools');
 
+    // tools section start
+
+    // all tools
     app.get('/tools', async (req, res) => {
       const query = {};
       const cursor = toolsCollection.find(query);
@@ -37,12 +40,24 @@ async function run() {
       res.send(tools);
     });
 
+    // tools by tool id
     app.get('/tools/:id', async (req, res) => {
       const id = req.params.id;
       const query = { _id: ObjectId(id) };
       const tool = await toolsCollection.findOne(query);
       res.send(tool);
     });
+
+    // post order data
+    app.post('/tools', async (req, res) => {
+      const newTools = req.body;
+      console.log('adding new Tools', newTools);
+      const result = await toolsCollection.insertOne(newTools);
+      console.log('Add New Tools Result', result);
+      res.send(result);
+    });
+
+    // tools sections ends
   } finally {
     // if need to close the server
     // await client.close();
