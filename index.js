@@ -52,6 +52,14 @@ async function run() {
     // tools sections ends
 
     // orders sections start
+    // get order data
+    // change
+    app.get('/order', async (req, res) => {
+      const query = {};
+      const cursor = ordersCollection.find(query);
+      const orders = await cursor.toArray();
+      res.send(orders);
+    });
 
     // post order data
     app.post('/order', async (req, res) => {
