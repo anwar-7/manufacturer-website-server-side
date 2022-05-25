@@ -29,9 +29,11 @@ async function run() {
   try {
     await client.connect();
     const toolsCollection = client.db('ztools').collection('tools');
+    // change
+    const reviewsCollection = client.db('ztools').collection('reviews');
+    const ordersCollection = client.db('ztools').collection('orders');
 
     // tools section start
-
     // all tools
     app.get('/tools', async (req, res) => {
       const query = {};
@@ -47,17 +49,19 @@ async function run() {
       const tool = await toolsCollection.findOne(query);
       res.send(tool);
     });
-
-    // post order data
-    app.post('/tools', async (req, res) => {
-      const newTools = req.body;
-      console.log('adding new Tools', newTools);
-      const result = await toolsCollection.insertOne(newTools);
-      console.log('Add New Tools Result', result);
-      res.send(result);
-    });
-
     // tools sections ends
+
+    // users reviews sections start
+    // all reviews
+    app.get('/reviews', async (req, res) => {
+      const query = {};
+      console.log('query', query);
+      const cursor = reviewsCollection.find(query);
+      const reviews = await cursor.toArray();
+      console.log('reviews', reviews);
+      res.send(reviews);
+    });
+    // users reviews sections end
   } finally {
     // if need to close the server
     // await client.close();
