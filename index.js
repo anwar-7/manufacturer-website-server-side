@@ -51,6 +51,18 @@ async function run() {
     });
     // tools sections ends
 
+    // orders sections start
+
+    // post order data
+    app.post('/order', async (req, res) => {
+      const newOrder = req.body;
+      console.log('adding new Tools', newOrder);
+      const result = await ordersCollection.insertOne(newOrder);
+      console.log('Add New order Result', result);
+      res.send(result);
+    });
+    // orders sections end
+
     // users reviews sections start
     // all reviews
     app.get('/reviews', async (req, res) => {
