@@ -64,7 +64,7 @@ async function run() {
     // post order data
     app.post('/order', async (req, res) => {
       const newOrder = req.body;
-      console.log('adding new Tools', newOrder);
+      console.log('adding new order', newOrder);
       const result = await ordersCollection.insertOne(newOrder);
       console.log('Add New order Result', result);
       res.send(result);
@@ -80,6 +80,15 @@ async function run() {
       const reviews = await cursor.toArray();
       console.log('reviews', reviews);
       res.send(reviews);
+
+      // post review data
+      app.post('/reviews', async (req, res) => {
+        const newReview = req.body;
+        console.log('adding new review', newReview);
+        const result = await reviewsCollection.insertOne(newReview);
+        console.log('Add New review Result', result);
+        res.send(result);
+      });
     });
     // users reviews sections end
   } finally {
