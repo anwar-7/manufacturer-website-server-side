@@ -140,9 +140,8 @@ async function run() {
       res.send(tool);
     });
     // tools sections ends
-
     // get order data
-    app.get('/order', async (req, res) => {
+    app.get('/allorder', async (req, res) => {
       const query = {};
       const cursor = ordersCollection.find(query);
       const orders = await cursor.toArray();
@@ -175,15 +174,6 @@ async function run() {
       const order = await ordersCollection.findOne(query);
       res.send(order);
     });
-
-    //Delete a order data
-    // app.delete('/order/:id', async (req, res) => {
-    //   const id = req.params.id;
-    //   const query = { _id: ObjectId(id) };
-    //   // console.log(id, query);
-    //   const result = await ordersCollection.deleteOne(query);
-    //   res.send(result);
-    // });
 
     // post order data
     app.post('/order', async (req, res) => {
