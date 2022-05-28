@@ -16,8 +16,10 @@ app.options('*', cors(corsConfig));
 //app.use(cors())
 app.use(express.json());
 
+const uri =
+  'mongodb+srv://dbUser1:test1234@cluster0.v2kvc.mongodb.net/?retryWrites=true&w=majority';
 // mongodb
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.v2kvc.mongodb.net/?retryWrites=true&w=majority`;
+// const uri = `mongodb+srv://anwar:anwar@cluster0.v2kvc.mongodb.net/?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
