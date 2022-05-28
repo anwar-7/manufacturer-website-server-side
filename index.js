@@ -48,7 +48,7 @@ async function run() {
     const userInfoUpdateCollection = client
       .db('ztools')
       .collection('userInfoUpdate');
-    // change
+
     //User data
     const userCollection = client.db('ztools').collection('users');
 
