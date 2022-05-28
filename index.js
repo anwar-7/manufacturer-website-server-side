@@ -139,49 +139,6 @@ async function run() {
     });
     // tools sections ends
 
-    // orders sections start
-    // get order data
-    // app.get('/order', async (req, res) => {
-    //   const query = {};
-    //   const cursor = ordersCollection.find(query);
-    //   const orders = await cursor.toArray();
-    //   res.send(orders);
-    // });
-
-    // change
-    // app.get('/order', verifyJWT, async (req, res) => {
-    //   const email = req.query.email;
-    //   // const authorization = req.headers.authorization;
-    //   // console.log(authorization);
-    //   const decodedEmail = req.decoded.email;
-    //   if (email === decodedEmail) {
-    //     const query = { email: email };
-    //     // const cursor = ordersCollection.find(query);
-    //     // const orders = await cursor.toArray();
-    //     const orders = await ordersCollection.find(query).toArray();
-    //     return res.send(orders);
-    //     // console.log(orders);
-    //     return res.status(403).send({ message: 'forbidden access' });
-    //   } else {
-    //   }
-    // });
-
-    // app.get('/order/:id', verifyJWT, async (req, res) => {
-    //   const id = req.params.id;
-    //   const query = { _id: ObjectId(id) };
-    //   const order = await ordersCollection.findOne(query);
-    //   res.send(order);
-    // });
-
-    // // post order data
-    // app.post('/order', async (req, res) => {
-    //   const newOrder = req.body;
-    //   // console.log('adding new order', newOrder);
-    //   const result = await ordersCollection.insertOne(newOrder);
-    //   // console.log('Add New order Result', result);
-    //   res.send(result);
-    // });
-
     // get order data
     app.get('/order', async (req, res) => {
       const query = {};
