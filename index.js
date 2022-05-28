@@ -29,9 +29,12 @@ async function run() {
   try {
     await client.connect();
     const toolsCollection = client.db('ztools').collection('tools');
-    // change
     const reviewsCollection = client.db('ztools').collection('reviews');
     const ordersCollection = client.db('ztools').collection('orders');
+    // change
+    const userInfoUpdateCollection = client
+      .db('ztools')
+      .collection('userInfoUpdate');
 
     // tools section start
     // all tools
@@ -53,7 +56,6 @@ async function run() {
 
     // orders sections start
     // get order data
-    // change
     app.get('/order', async (req, res) => {
       const query = {};
       const cursor = ordersCollection.find(query);
@@ -64,9 +66,9 @@ async function run() {
     // post order data
     app.post('/order', async (req, res) => {
       const newOrder = req.body;
-      console.log('adding new order', newOrder);
+      // console.log('adding new order', newOrder);
       const result = await ordersCollection.insertOne(newOrder);
-      console.log('Add New order Result', result);
+      // console.log('Add New order Result', result);
       res.send(result);
     });
     // orders sections end
@@ -75,22 +77,43 @@ async function run() {
     // all reviews
     app.get('/reviews', async (req, res) => {
       const query = {};
-      console.log('query', query);
+      // console.log('query', query);
       const cursor = reviewsCollection.find(query);
       const reviews = await cursor.toArray();
-      console.log('reviews', reviews);
+      // console.log('reviews', reviews);
       res.send(reviews);
-
-      // post review data
-      app.post('/reviews', async (req, res) => {
-        const newReview = req.body;
-        console.log('adding new review', newReview);
-        const result = await reviewsCollection.insertOne(newReview);
-        console.log('Add New review Result', result);
-        res.send(result);
-      });
+    });
+    // post review data
+    app.post('/reviews', async (req, res) => {
+      const newReview = req.body;
+      console.log('adding new review', newReview);
+      const result = await reviewsCollection.insertOne(newReview);
+      console.log('Add New review Result', result);
+      res.send(result);
     });
     // users reviews sections end
+
+    // user info update section start
+    // change
+
+    app.get('/userinfo', async (req, res) => {
+      const query = {};
+      console.log('user info query', query);
+      const cursor = userInfoUpdateCollection.find(query);
+      const userInfo = await cursor.toArray();
+      console.log('user info reviews', userInfo);
+      res.send(userInfo);
+    });
+
+    app.post('/userinfo', async (req, res) => {
+      const userInfoUpdate = req.body;
+      console.log('adding user Info Update', userInfoUpdate);
+      const result = await userInfoUpdateCollection.insertOne(userInfoUpdate);
+      console.log('user Info Update Result', result);
+      res.send(result);
+    });
+
+    // user info update section end
   } finally {
     // if need to close the server
     // await client.close();
